@@ -28,7 +28,6 @@ namespace ConfigComparer
             {
                 logger.LogException(ex);
             }
-            
             Console.WriteLine("Well done.");
             Console.ReadKey();
         }

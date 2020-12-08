@@ -1,5 +1,5 @@
 Hello! This is a comparer for XML config files.
-If you want to find keys, that have diffrent values in diffrent config files, this program will be useful for you :) 
+If you want to find keys, that have different values in different config files, this program will be useful for you :) 
 Lets's start!
 
 1. Open the ConfigComparer.sln file.

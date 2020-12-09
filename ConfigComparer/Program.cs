@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Configuration;
 using ConfigComparer.Comparer;
+using ConfigComparer.Logger;
 using ConfigComparer.Parser;
 using ConfigComparer.Serializer;
+using ConfigComparer.Unity;
+using Unity;
 
 namespace ConfigComparer
 {
@@ -10,8 +13,11 @@ namespace ConfigComparer
     {
         static void Main(string[] args)
         {
+            var container = Container.GetContainer;
+
             Console.WriteLine("Hello! This is a program for config files comparison. Please, read the 'README.txt' file before starting.");
             Console.WriteLine("Have you read it already? Press y/n");
+            
             while (true)
             {
                 var userInput = Console.ReadLine();
@@ -28,8 +34,8 @@ namespace ConfigComparer
                     var loyaltyProjectName = ConfigurationManager.AppSettings["LoyaltyProjectPath"];
                     var searchFile = ConfigurationManager.AppSettings["SearchFile"];
                     var loggerPath = ConfigurationManager.AppSettings["LoggerPath"];
-                    var serializer = new Serializer.Serializer();
-                    var logger = new Logger.Logger(loggerPath);
+                    var serializer = container.Resolve<ISerializer>(); 
+                    var logger = container.Resolve<ILogger>();
                     var fileParser = new FileParser(serializer);
                     Console.WriteLine($"Are you sure you want to compare the config files in folders {cloudProjectName} and {loyaltyProjectName}? Press y/n");
                     while (true)
@@ -60,11 +66,9 @@ namespace ConfigComparer
                         }
                         else Console.WriteLine("Wrong input! Press y/n");
                     }
-                    
                 }
                 else Console.WriteLine("Wrong input! Press y/n");
             }
-            
         }
     }
 }

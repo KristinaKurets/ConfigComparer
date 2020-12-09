@@ -36,7 +36,7 @@ namespace ConfigComparer
                     var loggerPath = ConfigurationManager.AppSettings["LoggerPath"];
                     var serializer = container.Resolve<ISerializer>(); 
                     var logger = container.Resolve<ILogger>();
-                    var fileParser = new FileParser(serializer);
+                    var fileParser = container.Resolve<IFileParser>();
                     Console.WriteLine($"Are you sure you want to compare the config files in folders {cloudProjectName} and {loyaltyProjectName}? Press y/n");
                     while (true)
                     {
@@ -50,7 +50,7 @@ namespace ConfigComparer
                         else if (userInput == "y")
                         {
                             {
-                                var comparer = new FilesComparer(logger, fileParser);
+                                var comparer = container.Resolve<IFilesComparer>();
                                 try
                                 {
                                     comparer.GoCompare(cloudProjectName, loyaltyProjectName, searchFile, loggerPath);

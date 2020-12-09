@@ -45,7 +45,6 @@ namespace ConfigComparer.Parser
                 }
                 result.ParseModels = resultList;
             }
-            
             return result;
         }
     }

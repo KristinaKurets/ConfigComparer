@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using ConfigComparer.Comparer;
 using ConfigComparer.Logger;
 using ConfigComparer.Parser;
 using ConfigComparer.Serializer;
@@ -24,6 +25,8 @@ namespace ConfigComparer.Unity
             _container = new UnityContainer();
             _container.RegisterType<ISerializer, Serializer.Serializer>();
             _container.RegisterType<ILogger, Logger.Logger>(new InjectionConstructor(ConfigurationManager.AppSettings["LoggerPath"]));
+            _container.RegisterType<IFileParser, FileParser>();
+            _container.RegisterType<IFilesComparer, FilesComparer>();
         }
     }
 }
